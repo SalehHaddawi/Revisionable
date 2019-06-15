@@ -5,8 +5,6 @@ After adding The model and migration files.
 
 in any model add ``` use RevisionableTrait ``` after the model class declration.
 
-to use it with none model: ``` \App\Revision::createNonModel('login'); ```
-
 ``` 'login' ``` can be any message.
 
 #### to exclude attributes from revision:
@@ -18,3 +16,6 @@ to use it with none model: ``` \App\Revision::createNonModel('login'); ```
 ``` protected static $formatRevision = ['title' => 'Title','age'=>'Age'];```
 
 ```'title'``` will be revisioned as ```'Title'``` and ```'age'``` will be revisioned as ```'Age'```
+
+### to use it with none model:
+``` \App\Revision::createNonModel('login'); ```

@@ -62,7 +62,7 @@ trait RevisionableTrait {
         $revision = \App\Revision::create([
             'revisionable_type'     => $modelName,
             'revisionable_id'       => $modelPrimaryKey,
-            'key'                   => self::CREATED_AT,
+            'key'                   => $this->getFormattedName(self::CREATED_AT),
             'old_value'             => null,
             'new_value'             => new \DateTime(),
             'user_id'               => $id,
@@ -133,7 +133,7 @@ trait RevisionableTrait {
         $revision = \App\Revision::create([
             'revisionable_type'     => $modelName,
             'revisionable_id'       => $modelPrimaryKey,
-            'key'                   => 'deleted_at',
+            'key'                   => $this->getFormattedName('deleted_at'),
             'old_value'             => null,
             'new_value'             => new \DateTime(),
             'user_id'               => $id,
@@ -159,7 +159,7 @@ trait RevisionableTrait {
             $this->formatRevisionAttr = $this->getFormatRevisionArray();
         }
 
-        if(!$this->formatRevisionAttrKeys){
+        if($this->formatRevisionAttr && !$this->formatRevisionAttrKeys){
             $this->formatRevisionAttrKeys = array_keys($this->formatRevisionAttr);
         }
 

@@ -7,24 +7,46 @@ use Illuminate\Database\Eloquent\Model;
 class Revision extends Model
 {
     protected $fillable = [
-        'revisionable_type',
-        'revisionable_id',
+        'model',
+        'model_id',
+        'user_id',
+        'event',
         'key',
+        'desc',
         'old_value',
         'new_value',
-        'user_id',
+        'ip'
     ];
 
-    public static function createNonModel($key)
+    public static function userHistory($user_id, $limit = -1, $page = -1)
     {
-        $revision = new Revision();
+        if (!$user_id) {
+            $user_id = auth()->id();
+        }
 
-        $revision->revisionable_type = 'NONE';
-        $revision->revisionable_id = -1;
-        $revision->user_id = auth()->id();
-        $revision->key = $key;
-        $revision->old_value = null;
-        $revision->new_value = null;
+        if($limit > -1 && $page > -1)
+            return Revision::where([
+                ['user_id', 'is not', null],
+                ['user_id', '=', $user_id]
+            ])->limit($limit)->offset(($page - 1) * $limit)->get();
+
+        return Revision::where([
+            ['user_id', 'is not', null],
+            ['user_id', '=', $user_id]
+        ])->get();
+    }
+
+    public static function createNonModel($event, $attr = [])
+    {
+        $revision = new Revision($attr);
+
+        $revision->event = $event;
+
+        if(!$revision->user_id)
+            $revision->user_id = auth()->id();
+
+        if(!$revision->ip)
+            $revision->ip = request()->ip();
 
         $revision->save();
     }

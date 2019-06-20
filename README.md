@@ -32,6 +32,8 @@ The ```event``` attribute **for a model** can be either ```create```, ```update`
 The ```key``` attribute **for a model** will be the name of the model's attribute that has changed, 
 for model creation it will be ```New``` + model class name.
 
+The ```desc``` attribute is optional.
+
 The ```old_value``` attribute **for a model** contains the old value before update, will be ```null``` for ```create``` and ```delete```.
 
 The ```new_value``` attribute **for a model** contains the new value after update.

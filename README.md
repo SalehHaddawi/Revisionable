@@ -27,14 +27,14 @@ The ```Revision``` contains the following attributes beside the ```created_at```
 
 The ```user_id``` attribute will be taken from ```auth()->id()```.
 
-The ```event``` attribute for a model can be either ```create```, ```update``` or ```delete``` for non model you can use any event name.
+The ```event``` attribute **for a model** can be either ```create```, ```update``` or ```delete``` for non model you can use any event name.
 
-The ```key``` attribute for a model will be the name of the model's attribute that has changed, 
+The ```key``` attribute **for a model** will be the name of the model's attribute that has changed, 
 for model creation it will be ```New``` + model class name.
 
-The ```old_value``` attribute for a model contains the old value before update, will be ```null``` for ```create``` and ```delete```.
+The ```old_value``` attribute **for a model** contains the old value before update, will be ```null``` for ```create``` and ```delete```.
 
-The ```new_value``` attribute for a model contains the new value after update.
+The ```new_value``` attribute **for a model** contains the new value after update.
 
 The ```ip``` attribute  will be taken from ```request()->ip()```.
 
@@ -56,6 +56,8 @@ The ```ip``` attribute  will be taken from ```request()->ip()```.
 
 ### to use it with none model:
 ``` \App\Revision::createNonModel('login'); ```
+
+Where ```'login'``` is the ```event``` name.
 
 you can pass array of attributes to the ```createNonModel``` function:
 

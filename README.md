@@ -27,7 +27,7 @@ The ```Revision``` contains the following attributes beside the ```created_at```
 
 The ```user_id``` attribute will be taken from ```auth()->id()```.
 
-The ```event``` attribute **for a model** can be either ```create```, ```update``` or ```delete``` for non model you can use any event name.
+The ```event``` attribute **for a model** can be either ```create```, ```update``` or ```delete``` for non model you can use any event name,  ```event``` is the **only** required attribute.
 
 The ```key``` attribute **for a model** will be the name of the model's attribute that has changed, 
 for model creation it will be ```New``` + model class name.
@@ -56,7 +56,9 @@ The ```ip``` attribute  will be taken from ```request()->ip()```.
 
 ```'title'``` will be revisioned as ```'Title'``` and ```'age'``` will be revisioned as ```'Age'```
 
-### to use it with none model:
+## to use it with none model:
+you can place ```createNonModel``` function in any place you like to log an event like login, logout, downloading...
+
 ``` \App\Revision::createNonModel('login'); ```
 
 Where ```'login'``` is the ```event``` name.
